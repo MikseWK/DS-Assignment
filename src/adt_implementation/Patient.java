@@ -1,6 +1,6 @@
 package adt_implementation;
 
-import adt.PatientADT;
+import adt.CustomizeADT;
 
 public class Patient implements PatientADT {
     private String patientID;

@@ -1,6 +1,6 @@
 package adt_implementation;
 
-import adt.RoomADT;
+import adt.CustomizeADT;
 
 public class Room implements RoomADT {
     private String roomID;

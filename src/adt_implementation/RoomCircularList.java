@@ -1,7 +1,6 @@
 package adt_implementation;
 
-import adt.RoomADT;
-import adt.RoomCircularListADT;
+import adt.CustomizeADT;
 
 public class RoomCircularList implements RoomCircularListADT {
 

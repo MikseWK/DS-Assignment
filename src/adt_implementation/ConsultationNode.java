@@ -1,6 +1,6 @@
 package adt_implementation;
 
-import adt.ConsultationNodeADT;
+import adt.CustomizeADT;
 
 public class ConsultationNode<T> implements ConsultationNodeADT<T> {
     private T data;

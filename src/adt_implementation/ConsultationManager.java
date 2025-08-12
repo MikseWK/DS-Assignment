@@ -1,8 +1,6 @@
 package adt_implementation;
 
-import adt.ConsultationADT;
-import adt.ConsultationManagerADT;
-import adt.PatientADT;
+import adt.CustomizeADT;
 
 import java.time.LocalDate;
 

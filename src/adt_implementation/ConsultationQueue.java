@@ -1,7 +1,6 @@
 package adt_implementation;
 
-import adt.ConsultationQueueADT;
-import adt.PatientADT;
+import adt.CustomizeADT;
 
 public class ConsultationQueue implements ConsultationQueueADT {
 

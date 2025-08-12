@@ -1,6 +1,6 @@
 package adt_implementation;
 
-import adt.ConsultationADT;
+import adt.CustomizeADT;
 import java.time.LocalDate;
 
 public class Consultation implements ConsultationADT {

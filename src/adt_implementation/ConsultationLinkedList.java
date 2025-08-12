@@ -1,8 +1,6 @@
 package adt_implementation;
 
-import adt.ConsultationListADT;
-import adt.ConsultationADT;
-import adt.ConsultationNodeADT;
+import adt.CustomizeADT;
 
 public class ConsultationLinkedList implements ConsultationListADT {
     private ConsultationNodeADT<ConsultationADT> head;

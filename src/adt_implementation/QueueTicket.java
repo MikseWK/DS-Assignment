@@ -1,6 +1,6 @@
 package adt_implementation;
 
-import adt.QueueTicketADT;
+import adt.CustomizeADT;
 
 public class QueueTicket implements QueueTicketADT {
     private int ticketNumber;
