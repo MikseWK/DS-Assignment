@@ -1,4 +1,4 @@
-package adt_implementation;
+package implementation;
 
 public class Patient {
     private String patientID;

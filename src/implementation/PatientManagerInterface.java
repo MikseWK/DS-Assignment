@@ -1,9 +1,8 @@
 package implementation;
 
 import adt.CustomizeADT;
-
 public interface PatientManagerInterface {
-    // Use your ADT for storage and retrieval
+    
     void addPatient(Patient patient);                      
     Patient getPatientByID(String patientID);               
     boolean removePatient(String patientID);               

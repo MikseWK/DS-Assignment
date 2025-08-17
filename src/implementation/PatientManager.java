@@ -1,8 +1,6 @@
 package implementation;
 
 import adt.CustomizeADT;
-import implementation.Patient;
-import implementation.PatientManagerInterface;
 
 public class PatientManager implements PatientManagerInterface {
     private CustomizeADT<String, Patient, Patient> patientADT;
