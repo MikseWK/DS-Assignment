@@ -1,8 +1,8 @@
-package customizeADT;
+package adt;
 
 public class CustomizeADT<K, V, T> implements CustomizeADTInterface<K, V, T> {
 
-    private class Node {
+    class Node {
         T data;
         Node next;
         Node(T data) { this.data = data; }

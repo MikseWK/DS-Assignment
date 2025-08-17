@@ -1,4 +1,5 @@
-import customizeADT.CustomizeADT;
+package adt;
+
 
 public class CustomizeADTTest {
     public static void main(String[] args) {
