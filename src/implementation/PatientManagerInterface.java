@@ -1,7 +1,6 @@
-package adt_implementation;
+package implementation;
 
 import adt.CustomizeADT;
-import adt_implementation.Patient; 
 
 public interface PatientManagerInterface {
     // Use your ADT for storage and retrieval
