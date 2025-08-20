@@ -6,10 +6,10 @@ import manager.*;
 public class DSA_ASG_NEW {
     public static void main(String[] args) {
         // Managers (each contains its own ADT)
-        PatientManager patientManager = new PatientManager();
-        DoctorManager doctorManager = new DoctorManager();
-        RoomManager roomManager = new RoomManager();
-        ConsultationManager consultationManager = new ConsultationManager();
+        PatientMaintenance patientManager = new PatientMaintenance();
+        DoctorMaintenance doctorManager = new DoctorMaintenance();
+        RoomMaintenance roomManager = new RoomMaintenance();
+        ConsultationMaintenance consultationManager = new ConsultationMaintenance();
 
         // Seed sample data (optional, for testing)
         patientManager.addPatient(new entity_implementation.Patient("P001", "Ali", 20, "M", "leowkaizhen@gmail.com"));

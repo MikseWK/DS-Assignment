@@ -2,23 +2,22 @@ package boundary;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import manager.PatientManager;
-import manager.DoctorManager;
-import manager.RoomManager;
-import manager.ConsultationManager;
+import manager.ConsultationMaintenance;
+import manager.DoctorMaintenance;
+import manager.PatientMaintenance;
+import manager.RoomMaintenance;
 
 public class MainMenuUI {
     private final Scanner scanner;
-    private final PatientManager patientManager;
-    private final DoctorManager doctorManager;
-    private final RoomManager roomManager;
-    private final ConsultationManager consultationManager;
+    private final PatientMaintenance patientManager;
+    private final DoctorMaintenance doctorManager;
+    private final RoomMaintenance roomManager;
+    private final ConsultationMaintenance consultationManager;
 
-    public MainMenuUI(PatientManager patientManager,
-                      DoctorManager doctorManager,
-                      RoomManager roomManager,
-                      ConsultationManager consultationManager) {
+    public MainMenuUI(PatientMaintenance patientManager,
+                      DoctorMaintenance doctorManager,
+                      RoomMaintenance roomManager,
+                      ConsultationMaintenance consultationManager) {
         this.patientManager = patientManager;
         this.doctorManager = doctorManager;
         this.roomManager = roomManager;
@@ -39,7 +38,7 @@ public class MainMenuUI {
                 case 2:
                     // go into Doctor Management UI
                     DoctorUI doctorUI = new DoctorUI(doctorManager, scanner);
-//                  doctorUI.start();
+                    doctorUI.start();
                     break;
                 case 3:
                     // go into Room Management UI

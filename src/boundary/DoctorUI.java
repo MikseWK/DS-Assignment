@@ -1,17 +1,16 @@
 package boundary;
 
 import entity_implementation.Doctor;
-import manager.DoctorManager;
 import entity_interface.DoctorInterface;
-
 import java.util.Scanner;
+import manager.DoctorMaintenance;
 
 public class DoctorUI {
 
     private final Scanner scanner;
-    private final DoctorManager doctorManager;
+    private final DoctorMaintenance doctorManager;
 
-    public DoctorUI(DoctorManager doctorManager, Scanner scanner) {
+    public DoctorUI(DoctorMaintenance doctorManager, Scanner scanner) {
         this.doctorManager = doctorManager;
         this.scanner = scanner;
     }

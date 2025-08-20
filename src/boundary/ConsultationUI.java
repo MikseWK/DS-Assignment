@@ -2,29 +2,28 @@ package boundary;
 
 import entity_implementation.Consultation;
 import entity_interface.ConsultationInterface;
-import entity_interface.PatientInterface;
 import entity_interface.DoctorInterface;
+import entity_interface.PatientInterface;
 import entity_interface.RoomInterface;
-import manager.ConsultationManager;
-import manager.PatientManager;
-import manager.DoctorManager;
-import manager.RoomManager;
-
 import java.time.LocalDate;
 import java.util.Scanner;
+import manager.ConsultationMaintenance;
+import manager.DoctorMaintenance;
+import manager.PatientMaintenance;
+import manager.RoomMaintenance;
 
 public class ConsultationUI {
 
     private final Scanner scanner;
-    private final ConsultationManager consultationManager;
-    private final PatientManager patientManager;
-    private final DoctorManager doctorManager;
-    private final RoomManager roomManager;
+    private final ConsultationMaintenance consultationManager;
+    private final PatientMaintenance patientManager;
+    private final DoctorMaintenance doctorManager;
+    private final RoomMaintenance roomManager;
 
-    public ConsultationUI(ConsultationManager consultationManager,
-                          PatientManager patientManager,
-                          DoctorManager doctorManager,
-                          RoomManager roomManager,
+    public ConsultationUI(ConsultationMaintenance consultationManager,
+                          PatientMaintenance patientManager,
+                          DoctorMaintenance doctorManager,
+                          RoomMaintenance roomManager,
                           Scanner scanner) {
         this.consultationManager = consultationManager;
         this.patientManager = patientManager;

@@ -1,17 +1,16 @@
 package boundary;
 
-import entity_interface.RoomInterface;
 import entity_implementation.Room;
-import manager.RoomManager;
-
+import entity_interface.RoomInterface;
 import java.util.Scanner;
+import manager.RoomMaintenance;
 
 public class RoomUI {
 
     private final Scanner scanner;
-    private final RoomManager roomManager;
+    private final RoomMaintenance roomManager;
 
-    public RoomUI(RoomManager roomManager, Scanner scanner) {
+    public RoomUI(RoomMaintenance roomManager, Scanner scanner) {
         this.roomManager = roomManager;
         this.scanner = scanner;
     }
