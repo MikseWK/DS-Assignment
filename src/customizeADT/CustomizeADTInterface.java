@@ -1,4 +1,4 @@
-package adt;
+package customizeADT;
 
 public interface CustomizeADTInterface<K, V, T> {
 
@@ -63,7 +63,7 @@ public interface CustomizeADTInterface<K, V, T> {
     // ======================
     // Object methods
     // ======================
-    CustomizeADT<K, V, T> clone();   // OPTIONAL: Deep copy of the ADT
+    CustomizeADTInterface<K, V, T> clone();   // OPTIONAL: Deep copy of the ADT
     @Override
     boolean equals(Object obj);      // OPTIONAL: Check logical equality with another ADT
 }

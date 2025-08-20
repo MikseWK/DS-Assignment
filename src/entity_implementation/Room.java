@@ -1,8 +1,8 @@
-package adt_implementation;
+package entity_implementation;
 
-import adt.CustomizeADT;
+import entity_interface.RoomInterface;
 
-public class Room implements RoomADT {
+public class Room implements RoomInterface {
     private String roomID;
     private String doctorName;
     private boolean available;

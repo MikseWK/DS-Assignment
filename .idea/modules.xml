@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DSA-Assignment.iml" filepath="$PROJECT_DIR$/DSA-Assignment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/DSA-Assignment2.iml" filepath="$PROJECT_DIR$/src/DSA-Assignment2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DSA_ASG_NEW.iml" filepath="$PROJECT_DIR$/DSA_ASG_NEW.iml" />
     </modules>
   </component>
 </project>

@@ -1,11 +1,11 @@
-package adt_implementation;
+package entity_implementation;
 
-import adt.CustomizeADT;
+import entity_interface.QueueTicketInterface;
 
-public class QueueTicket implements QueueTicketADT {
-    private int ticketNumber;
-    private String patientID;
-    private String roomID;
+public class QueueTicket implements QueueTicketInterface{
+    private final int ticketNumber;
+    private final String patientID;
+    private final String roomID;
     
     public QueueTicket() {
         this.ticketNumber = 0;

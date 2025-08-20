@@ -1,8 +1,10 @@
-package adt;
+package customizeADT;
+
+import customizeADT.CustomizeADTInterface;
 
 public class CustomizeADT<K, V, T> implements CustomizeADTInterface<K, V, T> {
 
-    class Node {
+    private class Node {
         T data;
         Node next;
         Node(T data) { this.data = data; }
@@ -366,19 +368,16 @@ public class CustomizeADT<K, V, T> implements CustomizeADTInterface<K, V, T> {
     public CustomizeADT<K, V, T> clone() {
         CustomizeADT<K, V, T> copy = new CustomizeADT<>();
 
-        // Clone list (Node-based)
         Node current = head;
         while (current != null) {
             copy.add(current.data); // reuses your add(T) method
             current = current.next;
         }
 
-        // Clone map
         for (int i = 0; i < mapSize; i++) {
             copy.put((K) mapEntries[i].getKey(), (V) mapEntries[i].getValue());
         }
 
-        // Clone queue
         for (int i = 0; i < queueSize; i++) {
             int index = (front + i) % queueArray.length;
             copy.enqueue(queueArray[index]);
