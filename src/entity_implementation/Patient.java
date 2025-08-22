@@ -1,8 +1,9 @@
 package entity_implementation;
 
 import entity_interface.PatientInterface;
+import java.io.Serializable;
 
-public class Patient implements PatientInterface {
+public class Patient implements PatientInterface, Serializable {
     private String patientID;
     private String name;
     private int age;

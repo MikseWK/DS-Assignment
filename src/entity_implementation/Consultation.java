@@ -1,9 +1,10 @@
 package entity_implementation;
 
-import java.time.LocalDate;
 import entity_interface.ConsultationInterface;
+import java.io.Serializable;
+import java.time.LocalDate;
 
-public class Consultation implements ConsultationInterface {
+public class Consultation implements ConsultationInterface, Serializable {
     private String consultationID;
     private String patientID;
     private String doctorID;      

@@ -1,8 +1,9 @@
 package entity_implementation;
 
 import entity_interface.QueueTicketInterface;
+import java.io.Serializable;
 
-public class QueueTicket implements QueueTicketInterface{
+public class QueueTicket implements QueueTicketInterface, Serializable {
     private final int ticketNumber;
     private final String patientID;
     private final String roomID;

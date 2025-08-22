@@ -1,17 +1,23 @@
 package manager;
 
 import customizeADT.CustomizeADT;
-import entity_interface.RoomInterface;
+import entity_interface.RoomInterface; // Import the interface
 import manager_interface.RoomManagerInterface;
 
-public class RoomManager implements RoomManagerInterface {
+public class RoomMaintenance implements RoomManagerInterface {
+    private CustomizeADT<String, RoomInterface, ?> roomADT;
 
-    private CustomizeADT<String, RoomInterface, RoomInterface> roomADT;
-
-    public RoomManager() {
-        roomADT = new CustomizeADT<>();
+    // Constructor to accept pre-loaded data
+    public RoomMaintenance(CustomizeADT<String, RoomInterface, ?> roomADT) {
+        this.roomADT = roomADT;
     }
 
+    
+    public RoomMaintenance() {
+        this(new CustomizeADT<>());
+    }
+
+    // Add a new room
     @Override
     public boolean addRoom(RoomInterface room) {
         if (roomADT.containsKey(room.getRoomID())) return false; // avoid duplicates
@@ -19,11 +25,21 @@ public class RoomManager implements RoomManagerInterface {
         return true;
     }
 
+    // Get room by ID
     @Override
     public RoomInterface getRoom(String roomID) {
         return roomADT.get(roomID);
     }
 
+    // Update room info
+    @Override
+    public boolean updateRoom(String roomID, RoomInterface updatedRoom) {
+        if (!roomADT.containsKey(roomID)) return false;
+        roomADT.put(roomID, updatedRoom);
+        return true;
+    }
+
+    // Remove a room by ID
     @Override
     public boolean removeRoom(String roomID) {
         if (!roomADT.containsKey(roomID)) return false;
@@ -31,40 +47,52 @@ public class RoomManager implements RoomManagerInterface {
         return true;
     }
 
-    @Override
+    // Display all rooms
     public void displayRooms() {
         if (roomADT.isEmpty()) {
             System.out.println("No rooms available.");
             return;
         }
 
-        RoomInterface[] allRooms = roomADT.values();
-        System.out.printf("%-5s %-15s %-20s %-10s %-15s%n", "No.", "Room ID", "Doctor", "Available", "Patient ID");
-        System.out.println("---------------------------------------------------------------");
+        // Correctly handle the array conversion
+        Object[] rawValues = roomADT.values();
+        RoomInterface[] allRooms = new RoomInterface[rawValues.length];
+        for(int i = 0; i < rawValues.length; i++) {
+            allRooms[i] = (RoomInterface) rawValues[i];
+        }
+
+        System.out.println("==========================================================");
+        System.out.printf("| %-5s | %-10s | %-20s | %-12s |\n",
+                "No", "Room ID", "Assigned Doctor", "Availability");
+        System.out.println("==========================================================");
         for (int i = 0; i < allRooms.length; i++) {
-            RoomInterface room = allRooms[i];
-            if (room != null) {
-                System.out.printf("%-5d %-15s %-20s %-10s %-15s%n",
-                        i + 1,
-                        room.getRoomID(),
-                        room.getDoctorName(),
-                        room.isAvailable() ? "Yes" : "No",
-                        room.getPatientID() != null ? room.getPatientID() : "None");
+            RoomInterface r = allRooms[i];
+            if (r != null) {
+                System.out.printf("| %-5d | %-10s | %-20s | %-12s |\n",
+                        (i + 1), r.getRoomID(), r.getDoctorName(), r.isAvailable() ? "Available" : "Occupied");
             }
         }
+        System.out.println("==========================================================");
     }
 
+    // Check if room exists
     @Override
     public boolean containsRoom(String roomID) {
         return roomADT.containsKey(roomID);
     }
 
+    // Get total number of rooms
     @Override
     public int getRoomCount() {
         return roomADT.size();
     }
 
     @Override
+    public CustomizeADT<String, RoomInterface, ?> getAllRooms() {
+        return this.roomADT;
+    }
+
+     @Override
     public RoomInterface getAvailableRoom() {
         RoomInterface[] allRooms = roomADT.values();
         for (RoomInterface room : allRooms) {
@@ -77,4 +105,5 @@ public class RoomManager implements RoomManagerInterface {
         System.out.println("No available rooms at the moment.");
         return null;
     }
+
 }

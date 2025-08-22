@@ -1,15 +1,20 @@
 package manager;
 
 import customizeADT.CustomizeADT;
-import entity_interface.PatientInterface;
+import entity_interface.PatientInterface; // Import the interface
 import manager_interface.PatientManagerInterface;
 
-public class PatientManager implements PatientManagerInterface {
+public class PatientMaintenance implements PatientManagerInterface {
+    private CustomizeADT<String, PatientInterface, ?> patientADT;
 
-    private CustomizeADT<String, PatientInterface, PatientInterface> patientADT;
+    
+    public PatientMaintenance(CustomizeADT<String, PatientInterface, ?> patientADT) {
+        this.patientADT = patientADT;
+    }
 
-    public PatientManager() {
-        patientADT = new CustomizeADT<>();
+   
+    public PatientMaintenance() {
+        this(new CustomizeADT<>());
     }
 
     // Add a new patient
@@ -42,33 +47,33 @@ public class PatientManager implements PatientManagerInterface {
         return true;
     }
 
-    @Override
+    // Display all patients
     public void displayPatients() {
         if (patientADT.isEmpty()) {
             System.out.println("No patients available.");
             return;
         }
 
-        System.out.println("====================================================================================================");
-        System.out.printf("| %-5s | %-10s | %-20s | %-5s | %-6s | %-35s |\n", 
-                          "No", "Patient ID", "Patient Name", "Age", "Gender", "Email");
-        System.out.println("====================================================================================================");
-
-        Object[] keys = patientADT.keys(); // get all patient IDs
-        for (int i = 0; i < keys.length; i++) {
-            PatientInterface p = patientADT.get((String) keys[i]); // get patient by ID
-            System.out.printf("| %-5d | %-10s | %-20s | %-5d | %-6s | %-35s |\n",
-                              i + 1,
-                              p.getPatientID(),
-                              p.getName(),
-                              p.getAge(),
-                              p.getGender(),
-                              p.getEmail());
+        // Correctly handle the array conversion
+        Object[] rawValues = patientADT.values();
+        PatientInterface[] allPatients = new PatientInterface[rawValues.length];
+        for(int i = 0; i < rawValues.length; i++) {
+            allPatients[i] = (PatientInterface) rawValues[i];
         }
 
-        System.out.println("====================================================================================================");
+        System.out.println("=====================================================================================");
+        System.out.printf("| %-5s | %-10s | %-20s | %-5s | %-8s | %-25s |\n",
+                "No", "Patient ID", "Name", "Age", "Gender", "Email");
+        System.out.println("=====================================================================================");
+        for (int i = 0; i < allPatients.length; i++) {
+            PatientInterface p = allPatients[i];
+            if (p != null) {
+                System.out.printf("| %-5d | %-10s | %-20s | %-5d | %-8s | %-25s |\n",
+                        (i + 1), p.getPatientID(), p.getName(), p.getAge(), p.getGender(), p.getEmail());
+            }
+        }
+        System.out.println("=====================================================================================");
     }
-
 
     // Check if patient exists
     @Override
@@ -80,5 +85,10 @@ public class PatientManager implements PatientManagerInterface {
     @Override
     public int getPatientCount() {
         return patientADT.size();
+    }
+
+    @Override
+    public CustomizeADT<String, PatientInterface, ?> getAllPatients() {
+        return this.patientADT;
     }
 }

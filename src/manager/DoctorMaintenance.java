@@ -1,18 +1,24 @@
 package manager;
 
 import customizeADT.CustomizeADT;
-import entity_interface.DoctorInterface;
+import entity_interface.DoctorInterface; 
 import manager_interface.DoctorManagerInterface;
 
-public class DoctorManager implements DoctorManagerInterface {
+public class DoctorMaintenance implements DoctorManagerInterface {
+    
+    private CustomizeADT<String, DoctorInterface, ?> doctorADT;
 
-    private CustomizeADT<String, DoctorInterface, DoctorInterface> doctorADT;
 
-    public DoctorManager() {
-        doctorADT = new CustomizeADT<>();
+    public DoctorMaintenance(CustomizeADT<String, DoctorInterface, ?> doctorADT) {
+        this.doctorADT = doctorADT;
     }
 
-    // Add a new doctor
+    // Default constructor
+    public DoctorMaintenance() {
+        this(new CustomizeADT<>());
+    }
+
+    // Update method signature to match the interface
     @Override
     public boolean addDoctor(DoctorInterface doctor) {
         if (doctorADT.containsKey(doctor.getDoctorID())) return false; // avoid duplicates
@@ -20,13 +26,13 @@ public class DoctorManager implements DoctorManagerInterface {
         return true;
     }
 
-    // Get doctor by ID
+    // Update return type to match the interface
     @Override
     public DoctorInterface getDoctor(String doctorID) {
         return doctorADT.get(doctorID);
     }
 
-    // Update doctor info
+    // Update method signature to match the interface
     @Override
     public boolean updateDoctor(String doctorID, DoctorInterface updatedDoctor) {
         if (!doctorADT.containsKey(doctorID)) return false;
@@ -56,7 +62,7 @@ public class DoctorManager implements DoctorManagerInterface {
         System.out.println("===================================================================");
         for (int i = 0; i < allDoctors.length; i++) {
             DoctorInterface doc = allDoctors[i];
-            if (doc != null) { // safeguard in case values() returns null slots
+            if (doc != null) {
                 System.out.printf("| %-5d | %-10s | %-15s | %-15s | %-15s |\n",
                         (i + 1),
                         doc.getDoctorID(),
@@ -78,5 +84,11 @@ public class DoctorManager implements DoctorManagerInterface {
     @Override
     public int getDoctorCount() {
         return doctorADT.size();
+    }
+
+    // Update return type to match the new field type
+    @Override
+    public CustomizeADT<String, DoctorInterface, ?> getAllDoctors() {
+        return this.doctorADT;
     }
 }

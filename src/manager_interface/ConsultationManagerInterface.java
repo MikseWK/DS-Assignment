@@ -1,5 +1,6 @@
 package manager_interface;
 
+import customizeADT.CustomizeADT; // Add this import
 import entity_interface.ConsultationInterface;
 import java.time.LocalDate;
 
@@ -8,6 +9,8 @@ public interface ConsultationManagerInterface {
     boolean addConsultation(String patientID, ConsultationInterface consultation);
 
     ConsultationInterface getConsultation(String consultationID);
+
+    boolean removeConsultation(String consultationID);
 
     boolean setFollowUp(String consultationID, LocalDate followUpDate);
 
@@ -20,8 +23,6 @@ public interface ConsultationManagerInterface {
     ConsultationInterface[] getConsultationsByDoctorID(String doctorID);
 
     String[] getRoomsByDoctorID(String doctorID);
-    
-    ConsultationInterface getLastConsultation();
-    
-    boolean removeConsultation(String consultationID);
+
+    CustomizeADT<String, ConsultationInterface, ?> getAllConsultations();
 }

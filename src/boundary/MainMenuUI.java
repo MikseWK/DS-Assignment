@@ -1,5 +1,6 @@
 package boundary;
 
+import DAO.*; // Import the DAO package
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import manager.ConsultationMaintenance;
@@ -28,6 +29,7 @@ public class MainMenuUI {
     public void start() {
         int choice;
         do {
+            displayMenu();
             choice = getMenuChoice();
             switch (choice) {
                 case 1:
@@ -51,24 +53,48 @@ public class MainMenuUI {
                     consultationUI.start();
                     break;
                 case 0:
-                    System.out.println("Exiting system... Goodbye!");
+                    shutdown(); // Call the new shutdown method
+                    System.out.println("\nExiting system. Goodbye!");
                     break;
                 default:
-                    System.out.println("Invalid choice! Please try again.");
+                    System.out.println("\nInvalid choice. Please try again.");
             }
         } while (choice != 0);
+        scanner.close();
+    }
+
+    private void shutdown() {
+        System.out.println("\nSaving all data to files...");
+
+        // Create DAO instances
+        PatientDAO patientDAO = new PatientDAO();
+        DoctorDAO doctorDAO = new DoctorDAO();
+        RoomDAO roomDAO = new RoomDAO();
+        ConsultationDAO consultationDAO = new ConsultationDAO();
+
+        // Save data from each manager
+        patientDAO.saveToFile(patientManager.getAllPatients());
+        doctorDAO.saveToFile(doctorManager.getAllDoctors());
+        roomDAO.saveToFile(roomManager.getAllRooms());
+        consultationDAO.saveToFile(consultationManager.getAllConsultations());
+
+        System.out.println("Data saved successfully.");
+    }
+
+    private void displayMenu() {
+        System.out.println("\n=== MAIN MENU ===");
+        System.out.println("1. Patient Management");
+        System.out.println("2. Doctor Management");
+        System.out.println("3. Room Management");
+        System.out.println("4. Consultation Management");
+        System.out.println("0. Exit");
     }
 
     private int getMenuChoice() {
         int choice = -1;
         boolean valid = false;
         while (!valid) {
-            System.out.println("\n=== MAIN MENU ===");
-            System.out.println("1. Patient Management");
-            System.out.println("2. Doctor Management");
-            System.out.println("3. Room Management");
-            System.out.println("4. Consultation Management");
-            System.out.println("0. Exit");
+            displayMenu();
             System.out.print("Enter your choice: ");
             try {
                 choice = scanner.nextInt();

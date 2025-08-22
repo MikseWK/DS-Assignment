@@ -1,20 +1,22 @@
 package manager_interface;
 
-import entity_interface.DoctorInterface;
+import customizeADT.CustomizeADT;
+import entity_interface.DoctorInterface; 
 
 public interface DoctorManagerInterface {
 
+    // Use DoctorInterface for all method signatures
     boolean addDoctor(DoctorInterface doctor);
 
     DoctorInterface getDoctor(String doctorID);
 
-    boolean removeDoctor(String doctorID);
+    boolean updateDoctor(String doctorID, DoctorInterface updatedDoctor);
 
-    void displayDoctors();
+    boolean removeDoctor(String doctorID);
 
     boolean containsDoctor(String doctorID);
 
     int getDoctorCount();
-    
-    boolean updateDoctor(String doctorID, DoctorInterface updatedDoctor);
+
+    CustomizeADT<String, DoctorInterface, ?> getAllDoctors();
 }

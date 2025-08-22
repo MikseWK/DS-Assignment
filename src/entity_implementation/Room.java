@@ -1,8 +1,9 @@
 package entity_implementation;
 
 import entity_interface.RoomInterface;
+import java.io.Serializable;
 
-public class Room implements RoomInterface {
+public class Room implements RoomInterface, Serializable {
     private String roomID;
     private String doctorName;
     private boolean available;

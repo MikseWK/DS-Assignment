@@ -1,33 +1,54 @@
 package dsa_asg_new;
 
+import DAO.*;
 import boundary.MainMenuUI;
+import customizeADT.CustomizeADT;
+import entity_implementation.*;
+import entity_interface.*; // Import the interfaces package
 import manager.*;
 
 public class DSA_ASG_NEW {
     public static void main(String[] args) {
-        // Managers (each contains its own ADT)
-        PatientMaintenance patientManager = new PatientMaintenance();
-        DoctorMaintenance doctorManager = new DoctorMaintenance();
-        RoomMaintenance roomManager = new RoomMaintenance();
-        ConsultationMaintenance consultationManager = new ConsultationMaintenance();
+        
+        PatientDAO patientDAO = new PatientDAO();
+        DoctorDAO doctorDAO = new DoctorDAO();
+        RoomDAO roomDAO = new RoomDAO();
+        ConsultationDAO consultationDAO = new ConsultationDAO();
 
-        // Seed sample data (optional, for testing)
-        patientManager.addPatient(new entity_implementation.Patient("P001", "Ali", 20, "M", "leowkaizhen@gmail.com"));
-        patientManager.addPatient(new entity_implementation.Patient("P002", "Abu", 21, "M", "abu@gmail.com"));
-        patientManager.addPatient(new entity_implementation.Patient("P003", "Akau", 22, "M", "akau@yahoo.com"));
+        // Retrieve data from files using the INTERFACE type
+        // This now matches the updated return type of your DAOs
+        CustomizeADT<String, PatientInterface, ?> patients = patientDAO.retrieveFromFile();
+        CustomizeADT<String, DoctorInterface, ?> doctors = doctorDAO.retrieveFromFile();
+        CustomizeADT<String, RoomInterface, ?> rooms = roomDAO.retrieveFromFile();
+        CustomizeADT<String, ConsultationInterface, ?> consultations = consultationDAO.retrieveFromFile();
 
-        doctorManager.addDoctor(new entity_implementation.Doctor("D001", "Alice", "Smith", "Cardiology", "alice@example.com", "012-3456789"));
-        doctorManager.addDoctor(new entity_implementation.Doctor("D002", "Bob", "Johnson", "Orthopedics", "bob@example.com", "013-9876543"));
-        doctorManager.addDoctor(new entity_implementation.Doctor("D003", "Charlie", "Lee", "Dermatology", "charlie@example.com", "014-5678901"));
+        
+        if (patients.isEmpty()) {
+            System.out.println("No patient data found. Seeding initial data...");
+            patients.put("P001", new Patient("P001", "Ali", 20, "M", "ali@web.com"));
+            patients.put("P002", new Patient("P002", "Siti", 25, "F", "siti@web.com"));
+        }
+        if (doctors.isEmpty()) {
+            System.out.println("No doctor data found. Seeding initial data...");
+            doctors.put("D001", new Doctor("D001", "Dr. Alice", "Smith", "Cardiology", "smith@gmail.com", "0123456789"));
+            doctors.put("D002", new Doctor("D002", "Dr. Bob", "Jones", "General", "bob@gmail.com", "9876543210"));
+        }
+        if (rooms.isEmpty()) {
+            System.out.println("No room data found. Seeding initial data...");
+            rooms.put("R001", new Room("R001", "Dr. Alice Smith", true));
+            rooms.put("R002", new Room("R002", "Dr. Bob Jones", true));
+        }
 
-        roomManager.addRoom(new entity_implementation.Room("R001", "Dr. Alice", true));
-        roomManager.addRoom(new entity_implementation.Room("R002", "Dr. Bob", true));
-        roomManager.addRoom(new entity_implementation.Room("R003", "Dr. Charlie", true));
+        
+        PatientMaintenance patientManager = new PatientMaintenance(patients);
+        DoctorMaintenance doctorManager = new DoctorMaintenance(doctors);
+        RoomMaintenance roomManager = new RoomMaintenance(rooms);
+        ConsultationMaintenance consultationManager = new ConsultationMaintenance(consultations);
 
-        // Pass managers into MainMenuUI
+        // Pass managers to UI
         MainMenuUI mainMenuUI = new MainMenuUI(patientManager, doctorManager, roomManager, consultationManager);
 
-        // Start application
+       
         mainMenuUI.start();
     }
 }
